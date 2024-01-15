@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 
 class ComplexNumber {
@@ -79,50 +79,46 @@ public:
     double argument() const { return std::atan2(imag, real); }
 };
 
+#include <iostream>
+
+void printComplexNumber(const ComplexNumber& num, const std::string& label) {
+    std::cout << label << ": ";
+     num.display();
+    std::cout << std::endl;
+}
+
 int main() {
-    ComplexNumber num1(2, 3);
+    // Создаем объекты ComplexNumber для тестирования
+    ComplexNumber num1(3, 4);
     ComplexNumber num2(1, 2);
 
-    // Получение/установка действительной и мнимой части
-    std::cout << "Real part of num1: " << num1.getReal() << std::endl;
-    std::cout << "Imaginary part of num1: " << num1.getImag() << std::endl;
+    // Выводим первоначальные значения
+    printComplexNumber(num1, "Initial Number 1");
+    printComplexNumber(num2, "Initial Number 2");
 
-    num1.setReal(5);
-    num1.setImag(7);
+    // Тест для функции add
+    ComplexNumber resultAdd = num1.add(num2);
+    printComplexNumber(resultAdd, "Addition Result");
 
-    std::cout << "Updated num1: ";
-    num1.display();
+    // Тест для функции subtract
+    ComplexNumber resultSubtract = num1.subtract(num2);
+    printComplexNumber(resultSubtract, "Subtraction Result");
 
-    // Сложение, вычитание, умножение, деление
-    ComplexNumber sum_result = num1.add(num2);
-    std::cout << "Sum: ";
-    sum_result.display();
+    // Тест для функции multiply
+    ComplexNumber resultMultiply = num1.multiply(num2);
+    printComplexNumber(resultMultiply, "Multiplication Result");
 
-    ComplexNumber diff_result = num1.subtract(num2);
-    std::cout << "Difference: ";
-    diff_result.display();
+    // Тест для функции divide
+    ComplexNumber resultDivide = num1.divide(num2);
+    printComplexNumber(resultDivide, "Division Result");
 
-    ComplexNumber product_result = num1.multiply(num2);
-    std::cout << "Product: ";
-    product_result.display();
+    // Тест для функции power
+    ComplexNumber resultPower = num1.power(2);
+    printComplexNumber(resultPower, "Power Result");
 
-    ComplexNumber divide_result = num1.divide(num2);
-    std::cout << "Divide: ";
-    divide_result.display();
+    // Тесты для операторов сравнения с целыми и дробными числами
+    std::cout << "Equality Test (int): " << (num1 == 3) << std::endl;
+    std::cout << "Inequality Test (float): " << (num2 != 2.5f) << std::endl;
 
-    // Сравнение
-    if (num1 == num2)
-        std::cout << "num1 is equal to num2" << std::endl;
-    else
-        std::cout << "num1 is not equal to num2" << std::endl;
-
-    // Возведение в степень
-    ComplexNumber power_result = num1.power(2);
-    std::cout << "num1 squared: ";
-    power_result.display();
-
-    // Модуль и аргумент
-    std::cout << "Modulus of num1: " << num1.modulus() << std::endl;
-    std::cout << "Argument of num1: " << num1.argument() << " radians" << std::endl;
-
+    return 0;
 }
